@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public event Action OnPlayerJumped;
 
     [Header("References")]
     [SerializeField] private Transform orientation;
@@ -23,7 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airMultiplier;
     [SerializeField] private float jumpDrag;
 
-
     [Header("Ground")]
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private float _playerHeight;
@@ -35,11 +36,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isSliding;
     [SerializeField] private float slideDrag;
 
+    [Header("PowerUp")]
+    private float startingMovementSpeed;
+    private float startingJumpForce;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         stateController = GetComponent<StateController>();
+    }
+    private void Start()
+    {
+        startingMovementSpeed = movementSpeed;
+        startingJumpForce = jumpForce;
     }
 
     private void Update()
@@ -102,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerJumping()
     {
+        OnPlayerJumped?.Invoke();
+
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f
             , rb.linearVelocity.z);
 
@@ -182,6 +194,25 @@ public class PlayerController : MonoBehaviour
         return isSliding;
     }
 
+    public void SetMovementSpeed(float speed, float duration)
+    {
+        movementSpeed += speed;
+        Invoke(nameof(ResetMovementSpeed), duration);
+    }
 
+    private void ResetMovementSpeed()
+    {
+        movementSpeed = startingMovementSpeed;
+    }
 
+    public void SetJumpForce(float force, float duration)
+    {
+        jumpForce += force;
+        Invoke(nameof(ResetJumpForce), duration);
+    }
+
+    private void ResetJumpForce()
+    {
+        jumpForce = startingJumpForce;
+    }
 }

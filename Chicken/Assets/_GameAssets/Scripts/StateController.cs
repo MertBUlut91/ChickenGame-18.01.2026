@@ -10,11 +10,6 @@ public class StateController : MonoBehaviour
         ChanceState(PlayerState.Idle);
     }
 
-    private void Update()
-    {
-        Debug.Log(currentPlayerState.ToString());
-    }
-
     public void ChanceState(PlayerState newPlayerstate)
     {
         if (currentPlayerState == newPlayerstate) return;
