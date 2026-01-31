@@ -91,8 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RottenWheatCollectible
   playerController: {fileID: 0}
-  decreaseMoveSpeed: -15
-  duration: 3
+  wheatDesignSO: {fileID: 11400000, guid: 21bf77e539dc35b44981a45fb8fac995, type: 2}
 --- !u!1 &6836529311142619594
 GameObject:
   m_ObjectHideFlags: 0

@@ -180,6 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883115c4211c2314da4914c650962a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GoldWheatCollectible
+  wheatDesignSO: {fileID: 11400000, guid: 58de26c709c4d0144bf43aef6fd1ff00, type: 2}
   playerController: {fileID: 0}
-  increaseMoveSpeed: 15
-  duration: 3
